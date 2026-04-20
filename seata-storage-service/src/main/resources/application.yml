@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: storage-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_storage?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+
+server:
+  port: 8082
+
+seata:
+  application-id: ${spring.application.name}
+  tx-service-group: my_test_tx_group
+  config:
+    type: file
+  registry:
+    type: file
+  service:
+    vgroup-mapping:
+      my_test_tx-group: default
+    grouplist:
+      default: 127.0.0.1:8091
+  data-source-proxy-mode: AT
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
